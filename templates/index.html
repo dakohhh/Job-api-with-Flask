@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Jobs</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+	<style type="text/css">
+    @font-face {
+      font-family: Poppins;
+      src: url(Poppins.ttf);
+    }
+
+		body{
+			font-family: Poppins;
+		}
+
+		.center{
+			margin: auto;
+			width: 50%;
+			padding: 10px;
+		}
+    .center1{
+			margin: auto;
+			width: 100%;
+			padding: 10px;
+		}
+
+	</style>
+    
+</head>
+<body>
+	<br>
+	<br>
+	<h1 style="text-align: center;"><strong>Find your Jobs</strong></h1>
+
+
+	<br>
+	<br>
+<div class="input-group center1" style="align-items: center;">
+    <form class="input-group center" action="search" method="post">
+        <input name="search1" type="search" id="form1" class="form-control" placeholder="e.g Type name of job" />
+        <button type="submit" class="btn btn-success"><strong>search</strong></button>
+    </form>
+</div>
+
+<br>
+<br>
+
+<!--<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>-->
+
+
+<br>
+<br>
+
+{% if get_flashed_messages() == [] or get_flashed_messages() == [[]] %}
+	<h4 style="text-align: center;color: grey;"><strong>No result!</strong></h1>
+{% else %}
+	{% for i in get_flashed_messages()[0] %}
+		<div class="card center">
+			<div class="card-header">
+				ID_{{ i[3] }}
+			</div>
+			<div class="card-body">
+				<h5 class="card-title"><strong>{{ i[1].upper() }}</strong></h5>
+				<p class="card-text">{{ i[6] }}</p>
+				<ul>
+					<li>Job title: {{ i[2] }}</li>
+					<li>Salary: {{ i[4] }}</li>
+					<li>Status: {{ i[5] }}</li>
+				</ul>
+				<a href="#" class="btn btn-primary">Proceed to Site</a>
+			</div>
+		</div>
+		<br>
+	{% endfor %}
+{% endif %}
+
+</body>
+</html>
